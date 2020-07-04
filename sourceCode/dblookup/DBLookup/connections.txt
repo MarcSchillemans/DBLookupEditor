@@ -1,0 +1,2 @@
+﻿Server=DESKTOP-N2VOQSH;Database=inbound;Trusted_Connection=True;
+Provider=DESKTOP-N2VOQSH;Database=inbound;Trusted_Connection=yes;
