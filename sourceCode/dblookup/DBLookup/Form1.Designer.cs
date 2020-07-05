@@ -312,7 +312,8 @@ namespace DBLookup
             this.dgrid_TableData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrid_TableData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgrid_TableData.Location = new System.Drawing.Point(3, 75);
-            this.dgrid_TableData.MultiSelect = false;
+            this.dgrid_TableData.MultiSelect = true;
+            this.dgrid_TableData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             this.dgrid_TableData.Name = "dgrid_TableData";
             this.dgrid_TableData.RowHeadersWidth = 51;
             this.dgrid_TableData.Size = new System.Drawing.Size(718, 208);
