@@ -11,6 +11,16 @@ namespace DBLookup
     }
     public partial class Form1 : Form
     {
+        private bool DeleteSelectedRecordsFromTableGrid(DataGridView dgrid)
+        {
+            bool bResult = false;
+            foreach (DataGridViewRow row in dgrid.SelectedRows)
+            {
+                dgrid.Rows.Remove(row);
+                bResult = true;
+            }
+            return bResult;
+        }
         private void ShowData(TreeView tree, TreeNodeCollection tableNode)
         {
             mod_sTableInGrid = tree.SelectedNode.Text;

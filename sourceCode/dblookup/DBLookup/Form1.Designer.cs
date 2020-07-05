@@ -48,6 +48,7 @@ namespace DBLookup
             this.btnClearDataTableFilter = new System.Windows.Forms.Button();
             this.btnScriptTableData = new System.Windows.Forms.Button();
             this.chkTruncateFirst = new System.Windows.Forms.CheckBox();
+            this.btnDeleteRecordsFromTableGrid = new System.Windows.Forms.Button();
             this.btnSaveChangesToProjectAndDB = new System.Windows.Forms.Button();
             this.Tlp_Datagrids = new System.Windows.Forms.TableLayoutPanel();
             this.dgrid_TableData = new System.Windows.Forms.DataGridView();
@@ -87,9 +88,10 @@ namespace DBLookup
             // 
             // btnApplyChangesToDB
             // 
-            this.btnApplyChangesToDB.Location = new System.Drawing.Point(437, 3);
+            this.btnApplyChangesToDB.Location = new System.Drawing.Point(371, 4);
+            this.btnApplyChangesToDB.Margin = new System.Windows.Forms.Padding(4);
             this.btnApplyChangesToDB.Name = "btnApplyChangesToDB";
-            this.btnApplyChangesToDB.Size = new System.Drawing.Size(134, 23);
+            this.btnApplyChangesToDB.Size = new System.Drawing.Size(179, 28);
             this.btnApplyChangesToDB.TabIndex = 2;
             this.btnApplyChangesToDB.Text = "Apply Changes To DB";
             this.btnApplyChangesToDB.UseVisualStyleBackColor = true;
@@ -99,6 +101,7 @@ namespace DBLookup
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -111,8 +114,9 @@ namespace DBLookup
             // 
             this.splitContainer1.Panel2.Controls.Add(this.Tlp_Datagrids);
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
-            this.splitContainer1.Size = new System.Drawing.Size(724, 534);
-            this.splitContainer1.SplitterDistance = 209;
+            this.splitContainer1.Size = new System.Drawing.Size(965, 657);
+            this.splitContainer1.SplitterDistance = 257;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 5;
             // 
             // tableLayoutPanel1
@@ -126,20 +130,22 @@ namespace DBLookup
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(0, 5);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(0, 6);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 7F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 9F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(724, 209);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(965, 257);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 79);
+            this.splitContainer2.Location = new System.Drawing.Point(4, 98);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -149,16 +155,18 @@ namespace DBLookup
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.txtSQL);
-            this.splitContainer2.Size = new System.Drawing.Size(718, 145);
-            this.splitContainer2.SplitterDistance = 118;
+            this.splitContainer2.Size = new System.Drawing.Size(957, 178);
+            this.splitContainer2.SplitterDistance = 157;
+            this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 3;
             // 
             // treeDBtables
             // 
             this.treeDBtables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeDBtables.Location = new System.Drawing.Point(0, 0);
+            this.treeDBtables.Margin = new System.Windows.Forms.Padding(4);
             this.treeDBtables.Name = "treeDBtables";
-            this.treeDBtables.Size = new System.Drawing.Size(118, 145);
+            this.treeDBtables.Size = new System.Drawing.Size(157, 178);
             this.treeDBtables.TabIndex = 0;
             this.treeDBtables.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.TreeView1_MouseDoubleClick);
             this.treeDBtables.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TreeView1_MouseDown);
@@ -168,10 +176,11 @@ namespace DBLookup
             this.txtSQL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSQL.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSQL.Location = new System.Drawing.Point(0, 0);
+            this.txtSQL.Margin = new System.Windows.Forms.Padding(4);
             this.txtSQL.Multiline = true;
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQL.Size = new System.Drawing.Size(596, 145);
+            this.txtSQL.Size = new System.Drawing.Size(795, 178);
             this.txtSQL.TabIndex = 4;
             this.txtSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSQL_KeyDown);
             // 
@@ -183,22 +192,23 @@ namespace DBLookup
             this.Tlp_OpenConnection.Controls.Add(this.cmbConnectString, 1, 0);
             this.Tlp_OpenConnection.Controls.Add(this.lblConnection, 0, 0);
             this.Tlp_OpenConnection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Tlp_OpenConnection.Location = new System.Drawing.Point(4, 4);
-            this.Tlp_OpenConnection.Margin = new System.Windows.Forms.Padding(4);
+            this.Tlp_OpenConnection.Location = new System.Drawing.Point(5, 5);
+            this.Tlp_OpenConnection.Margin = new System.Windows.Forms.Padding(5);
             this.Tlp_OpenConnection.Name = "Tlp_OpenConnection";
             this.Tlp_OpenConnection.RowCount = 1;
             this.Tlp_OpenConnection.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.Tlp_OpenConnection.Size = new System.Drawing.Size(716, 26);
+            this.Tlp_OpenConnection.Size = new System.Drawing.Size(955, 32);
             this.Tlp_OpenConnection.TabIndex = 4;
             // 
             // cmbConnectString
             // 
             this.cmbConnectString.Dock = System.Windows.Forms.DockStyle.Top;
             this.cmbConnectString.FormattingEnabled = true;
-            this.cmbConnectString.Location = new System.Drawing.Point(108, 3);
+            this.cmbConnectString.Location = new System.Drawing.Point(144, 4);
+            this.cmbConnectString.Margin = new System.Windows.Forms.Padding(4);
             this.cmbConnectString.MaxDropDownItems = 50;
             this.cmbConnectString.Name = "cmbConnectString";
-            this.cmbConnectString.Size = new System.Drawing.Size(605, 21);
+            this.cmbConnectString.Size = new System.Drawing.Size(807, 24);
             this.cmbConnectString.TabIndex = 1;
             // 
             // lblConnection
@@ -206,10 +216,9 @@ namespace DBLookup
             this.lblConnection.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblConnection.AutoSize = true;
             this.lblConnection.CausesValidation = false;
-            this.lblConnection.Location = new System.Drawing.Point(16, 0);
-            this.lblConnection.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblConnection.Location = new System.Drawing.Point(7, 7);
             this.lblConnection.Name = "lblConnection";
-            this.lblConnection.Size = new System.Drawing.Size(72, 26);
+            this.lblConnection.Size = new System.Drawing.Size(126, 17);
             this.lblConnection.TabIndex = 0;
             this.lblConnection.Text = "Select Connection:";
             // 
@@ -217,22 +226,24 @@ namespace DBLookup
             // 
             this.flowLayoutPanel1.Controls.Add(this.btnCollapseTree);
             this.flowLayoutPanel1.Controls.Add(this.btnClearDataTableFilter);
+            this.flowLayoutPanel1.Controls.Add(this.btnDeleteRecordsFromTableGrid);
+            this.flowLayoutPanel1.Controls.Add(this.btnApplyChangesToDB);
             this.flowLayoutPanel1.Controls.Add(this.btnScriptTableData);
             this.flowLayoutPanel1.Controls.Add(this.chkTruncateFirst);
-            this.flowLayoutPanel1.Controls.Add(this.btnApplyChangesToDB);
             this.flowLayoutPanel1.Controls.Add(this.btnSaveChangesToProjectAndDB);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 37);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 46);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(718, 29);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(957, 35);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // btnCollapseTree
             // 
-            this.btnCollapseTree.Location = new System.Drawing.Point(2, 2);
-            this.btnCollapseTree.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCollapseTree.Location = new System.Drawing.Point(3, 2);
+            this.btnCollapseTree.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCollapseTree.Name = "btnCollapseTree";
-            this.btnCollapseTree.Size = new System.Drawing.Size(87, 23);
+            this.btnCollapseTree.Size = new System.Drawing.Size(116, 28);
             this.btnCollapseTree.TabIndex = 0;
             this.btnCollapseTree.Text = "Collapse Tree";
             this.btnCollapseTree.UseVisualStyleBackColor = true;
@@ -241,10 +252,10 @@ namespace DBLookup
             // btnClearDataTableFilter
             // 
             this.btnClearDataTableFilter.Enabled = false;
-            this.btnClearDataTableFilter.Location = new System.Drawing.Point(93, 2);
-            this.btnClearDataTableFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClearDataTableFilter.Location = new System.Drawing.Point(125, 2);
+            this.btnClearDataTableFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClearDataTableFilter.Name = "btnClearDataTableFilter";
-            this.btnClearDataTableFilter.Size = new System.Drawing.Size(81, 24);
+            this.btnClearDataTableFilter.Size = new System.Drawing.Size(108, 30);
             this.btnClearDataTableFilter.TabIndex = 6;
             this.btnClearDataTableFilter.Text = "Clear Filter";
             this.btnClearDataTableFilter.UseVisualStyleBackColor = true;
@@ -253,9 +264,10 @@ namespace DBLookup
             // btnScriptTableData
             // 
             this.btnScriptTableData.Enabled = false;
-            this.btnScriptTableData.Location = new System.Drawing.Point(179, 3);
+            this.btnScriptTableData.Location = new System.Drawing.Point(558, 4);
+            this.btnScriptTableData.Margin = new System.Windows.Forms.Padding(4);
             this.btnScriptTableData.Name = "btnScriptTableData";
-            this.btnScriptTableData.Size = new System.Drawing.Size(145, 23);
+            this.btnScriptTableData.Size = new System.Drawing.Size(134, 28);
             this.btnScriptTableData.TabIndex = 3;
             this.btnScriptTableData.Text = "Script Table Data";
             this.btnScriptTableData.UseVisualStyleBackColor = true;
@@ -267,20 +279,31 @@ namespace DBLookup
             this.chkTruncateFirst.Checked = true;
             this.chkTruncateFirst.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTruncateFirst.Enabled = false;
-            this.chkTruncateFirst.Location = new System.Drawing.Point(329, 2);
-            this.chkTruncateFirst.Margin = new System.Windows.Forms.Padding(2);
+            this.chkTruncateFirst.Location = new System.Drawing.Point(699, 2);
+            this.chkTruncateFirst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkTruncateFirst.Name = "chkTruncateFirst";
-            this.chkTruncateFirst.Size = new System.Drawing.Size(103, 19);
+            this.chkTruncateFirst.Size = new System.Drawing.Size(118, 21);
             this.chkTruncateFirst.TabIndex = 5;
             this.chkTruncateFirst.Text = "Truncate First";
             this.chkTruncateFirst.UseVisualStyleBackColor = true;
             // 
+            // btnDeleteRecordsFromTableGrid
+            // 
+            this.btnDeleteRecordsFromTableGrid.Location = new System.Drawing.Point(239, 3);
+            this.btnDeleteRecordsFromTableGrid.Name = "btnDeleteRecordsFromTableGrid";
+            this.btnDeleteRecordsFromTableGrid.Size = new System.Drawing.Size(125, 29);
+            this.btnDeleteRecordsFromTableGrid.TabIndex = 7;
+            this.btnDeleteRecordsFromTableGrid.Text = "Delete Records";
+            this.btnDeleteRecordsFromTableGrid.UseVisualStyleBackColor = true;
+            this.btnDeleteRecordsFromTableGrid.Click += new System.EventHandler(this.BtnDeleteRecordsFromTableGrild_Click);
+            // 
             // btnSaveChangesToProjectAndDB
             // 
             this.btnSaveChangesToProjectAndDB.Enabled = false;
-            this.btnSaveChangesToProjectAndDB.Location = new System.Drawing.Point(3, 32);
+            this.btnSaveChangesToProjectAndDB.Location = new System.Drawing.Point(4, 40);
+            this.btnSaveChangesToProjectAndDB.Margin = new System.Windows.Forms.Padding(4);
             this.btnSaveChangesToProjectAndDB.Name = "btnSaveChangesToProjectAndDB";
-            this.btnSaveChangesToProjectAndDB.Size = new System.Drawing.Size(184, 23);
+            this.btnSaveChangesToProjectAndDB.Size = new System.Drawing.Size(245, 28);
             this.btnSaveChangesToProjectAndDB.TabIndex = 4;
             this.btnSaveChangesToProjectAndDB.Text = "Save Changes to Project and DB";
             this.btnSaveChangesToProjectAndDB.UseVisualStyleBackColor = true;
@@ -294,12 +317,12 @@ namespace DBLookup
             this.Tlp_Datagrids.Controls.Add(this.dgrid_Search, 0, 0);
             this.Tlp_Datagrids.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Tlp_Datagrids.Location = new System.Drawing.Point(0, 0);
-            this.Tlp_Datagrids.Margin = new System.Windows.Forms.Padding(2);
+            this.Tlp_Datagrids.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Tlp_Datagrids.Name = "Tlp_Datagrids";
             this.Tlp_Datagrids.RowCount = 2;
             this.Tlp_Datagrids.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.41899F));
             this.Tlp_Datagrids.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.58101F));
-            this.Tlp_Datagrids.Size = new System.Drawing.Size(724, 286);
+            this.Tlp_Datagrids.Size = new System.Drawing.Size(965, 360);
             this.Tlp_Datagrids.TabIndex = 5;
             // 
             // dgrid_TableData
@@ -311,12 +334,12 @@ namespace DBLookup
             this.dgrid_TableData.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgrid_TableData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrid_TableData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgrid_TableData.Location = new System.Drawing.Point(3, 75);
-            this.dgrid_TableData.MultiSelect = true;
-            this.dgrid_TableData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dgrid_TableData.Location = new System.Drawing.Point(4, 95);
+            this.dgrid_TableData.Margin = new System.Windows.Forms.Padding(4);
             this.dgrid_TableData.Name = "dgrid_TableData";
             this.dgrid_TableData.RowHeadersWidth = 51;
-            this.dgrid_TableData.Size = new System.Drawing.Size(718, 208);
+            this.dgrid_TableData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgrid_TableData.Size = new System.Drawing.Size(957, 261);
             this.dgrid_TableData.TabIndex = 4;
             // 
             // dgrid_Search
@@ -329,11 +352,12 @@ namespace DBLookup
             this.dgrid_Search.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgrid_Search.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrid_Search.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgrid_Search.Location = new System.Drawing.Point(3, 3);
+            this.dgrid_Search.Location = new System.Drawing.Point(4, 4);
+            this.dgrid_Search.Margin = new System.Windows.Forms.Padding(4);
             this.dgrid_Search.MultiSelect = false;
             this.dgrid_Search.Name = "dgrid_Search";
             this.dgrid_Search.RowHeadersWidth = 51;
-            this.dgrid_Search.Size = new System.Drawing.Size(718, 66);
+            this.dgrid_Search.Size = new System.Drawing.Size(957, 83);
             this.dgrid_Search.TabIndex = 3;
             // 
             // statusStrip1
@@ -343,17 +367,18 @@ namespace DBLookup
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 286);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 360);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(724, 35);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(965, 35);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
+            this.toolStripStatusLabel2.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusLabel2.BorderStyle = System.Windows.Forms.Border3DStyle.RaisedOuter;
             this.toolStripStatusLabel2.Margin = new System.Windows.Forms.Padding(2, 5, 5, 2);
@@ -450,11 +475,12 @@ namespace DBLookup
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 534);
+            this.ClientSize = new System.Drawing.Size(965, 657);
             this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "DB Lookup";
             this.Load += new System.EventHandler(this.Form1Load);
@@ -519,6 +545,7 @@ namespace DBLookup
         private CheckBox chkTruncateFirst;
         private Button btnClearDataTableFilter;
         private Timer tmrTimeOut_TableData;
+        private Button btnDeleteRecordsFromTableGrid;
     }
 }
 

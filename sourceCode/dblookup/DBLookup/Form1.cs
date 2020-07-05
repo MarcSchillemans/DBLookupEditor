@@ -421,6 +421,11 @@ namespace DBLookup
         #endregion
 
         #region button_clicks
+        private void BtnDeleteRecordsFromTableGrild_Click(object sender, EventArgs e)
+        {
+            DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
+        }
+
         private void BtnCollapseTree_Click(object sender, EventArgs e)
         {
             TreeNode tn = treeDBtables.Nodes[0];
@@ -441,6 +446,7 @@ namespace DBLookup
             {
                 case "SQL":
                     UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Update");
+                    UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Delete");
                     break;
                 case "OLE":
                     break;
@@ -486,5 +492,6 @@ namespace DBLookup
         {
             mod_bTimedOut = true;
         }
+
     }
 }

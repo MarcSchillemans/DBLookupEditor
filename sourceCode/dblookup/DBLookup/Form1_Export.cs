@@ -39,7 +39,7 @@ namespace DBLookup
                             res = sqlDataAdapter.Update(table);
                             break;
                         case "Delete":
-                            //res = sqlDataAdapter.DeleteCommand(table);
+                            res = sqlDataAdapter.Update(table);
                             break;
                         case "Insert":
                             //res = sqlDataAdapter.Insert(table);
