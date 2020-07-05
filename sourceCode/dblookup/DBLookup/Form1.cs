@@ -15,6 +15,7 @@ namespace DBLookup
         private DataTable mod_dtblTable;
         private String mod_sCurrentConnection;
         private String mod_sTableInGrid;
+        private int mod_iRowIndexFromMouseRightClick;
         private Rectangle mod_rectDragBoxFromMouseDown;
         private int mod_iRowIndexFromMouseDown;
         private int mod_iRowIndexOfItemUnderMouseToDrop;
@@ -24,6 +25,7 @@ namespace DBLookup
         private bool mod_bTimedOut;
         private List<String> mod_lstLookupTables;
         private List<String> mod_lstConnectionStrings;
+
 
         public Form1()
         {
@@ -84,7 +86,61 @@ namespace DBLookup
             }
         }
 
+        private void CmenuItemDgrid_Table_Actions_MouseDown(object sender, MouseEventArgs e) {
+            DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
+        }
+
         private void Dgrid_TableData_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            DataGridView.HitTestInfo ht = dgrid_TableData.HitTest(e.X, e.Y);
+            mod_iRowIndexFromMouseDown = ht.RowIndex;
+
+            if (e.Button == MouseButtons.Right)
+            {
+                bool bRowsAreSelected = false;
+                if (dgrid_TableData.SelectedRows.Count > 0) bRowsAreSelected = true;
+                bool bClickedRowIsInSelection = dgrid_TableData.Rows[mod_iRowIndexFromMouseDown].Selected;
+
+                //Checks for correct column index
+                if ((ht.RowIndex != -1) || (ht.RowIndex == -1 && bRowsAreSelected))
+                {
+                    ContextMenuStrip cmenuDgrid_Table_Actions = new ContextMenuStrip();
+                    ToolStripMenuItem cmenuItemDgrid_Table_Actions = new ToolStripMenuItem("Delete Record(s)");
+                    cmenuItemDgrid_Table_Actions.MouseDown += CmenuItemDgrid_Table_Actions_MouseDown;
+                    cmenuDgrid_Table_Actions.Items.AddRange(new ToolStripItem[] { cmenuItemDgrid_Table_Actions});
+                    dgrid_TableData.ContextMenuStrip = cmenuDgrid_Table_Actions;
+                }
+                else
+                {
+                    dgrid_TableData.ContextMenuStrip = null;
+                }
+            }
+            else
+            {
+                dgrid_TableData.ContextMenuStrip = null;
+            }
+
+            if (mod_iRowIndexFromMouseDown != -1)
+            {
+                // Remember the point where the mouse down occurred.
+                // The DragSize indicates the size that the mouse can move
+                // before a drag event should be started.               
+                Size dragSize = SystemInformation.DragSize;
+
+                // Create a rectangle using the DragSize, with the mouse position being
+
+                // at the center of the rectangle.
+                mod_rectDragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2),
+                                                               e.Y - (dragSize.Height / 2)),
+                                                        dragSize);
+            }
+            else
+                // Reset the rectangle if the mouse is not over an item in the ListBox.
+                mod_rectDragBoxFromMouseDown = Rectangle.Empty;
+        }
+
+        private void Original_Dgrid_TableData_MouseDown(object sender, MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
             DataGridView.HitTestInfo ht = dgrid_TableData.HitTest(e.X, e.Y);
@@ -97,13 +153,13 @@ namespace DBLookup
                 {
                     //Create the ContextStripMenu for Creating the PO Sub Form
                     ContextMenuStrip menu = new ContextMenuStrip();
-                    ToolStripMenuItem menuClip1 = new ToolStripMenuItem("Copy to Clipboard");
+                    ToolStripMenuItem cmenuItemDgrid_Table_Actions = new ToolStripMenuItem("Copy to Clipboard");
                     ToolStripMenuItem menuClip2 = new ToolStripMenuItem("Export to Text");
 
-                    menuClip1.MouseDown += ExportSQLTextToClipboard;
+                    cmenuItemDgrid_Table_Actions.MouseDown += ExportSQLTextToClipboard;
                     menuClip2.MouseDown += ExportCsv;
 
-                    menu.Items.AddRange(new ToolStripItem[] { menuClip1, menuClip2 });
+                    menu.Items.AddRange(new ToolStripItem[] { cmenuItemDgrid_Table_Actions, menuClip2 });
 
                     //Assign created context menu strip to the DataGridView
                     dgrid_TableData.ContextMenuStrip = menu;
@@ -136,6 +192,7 @@ namespace DBLookup
                 // Reset the rectangle if the mouse is not over an item in the ListBox.
                 mod_rectDragBoxFromMouseDown = Rectangle.Empty;
         }
+
 
         private void Dgrid_TableData_DragOver(object sender, DragEventArgs e)
         {

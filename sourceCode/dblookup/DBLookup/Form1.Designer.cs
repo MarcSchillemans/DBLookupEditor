@@ -341,6 +341,7 @@ namespace DBLookup
             this.dgrid_TableData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrid_TableData.Size = new System.Drawing.Size(957, 261);
             this.dgrid_TableData.TabIndex = 4;
+            this.dgrid_TableData.MouseDown += Dgrid_TableData_MouseDown;
             // 
             // dgrid_Search
             // 
