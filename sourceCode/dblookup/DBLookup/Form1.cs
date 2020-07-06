@@ -222,18 +222,6 @@ namespace DBLookup
                 //dgrid_TableData.Rows.Insert(mod_iRowIndexOfItemUnderMouseToDrop, rowToMove);
             }
         }
-        private void txtSQL_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.E)
-            {
-                String sSQL = Get_Query_From_SqlBox();
-                ExecuteSQL(mod_sCurrentConnection ,sSQL);
-            }
-            else if (e.Control && e.KeyCode == Keys.A)
-            {
-                txtSQL.SelectAll();
-            }
-        }
 
         /// <summary>
         /// on enter get the sql structure if possible

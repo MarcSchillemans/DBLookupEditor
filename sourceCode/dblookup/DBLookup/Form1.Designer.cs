@@ -182,7 +182,6 @@ namespace DBLookup
             this.txtSQL.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtSQL.Size = new System.Drawing.Size(795, 178);
             this.txtSQL.TabIndex = 4;
-            this.txtSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSQL_KeyDown);
             // 
             // Tlp_OpenConnection
             // 
