@@ -246,7 +246,7 @@ namespace DBLookup
         #endregion
         private void Dgrid_Search_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            ChangeFilter();
+            ChangeFilter(e.RowIndex);
         }
 
         #region Background Worker SQL Process

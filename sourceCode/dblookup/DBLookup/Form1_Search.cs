@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DBLookup
 {
-    public class noreason
+    public class FakeClass3
     {
 
     }
@@ -30,7 +30,7 @@ namespace DBLookup
                 col.Width = dgrid_TableData.Columns[col.Index].Width;
         }
 
-        private void ChangeFilter()
+        private void ChangeFilter(int iFilterRow)
         {
             String sColumnName = ""; String sValue = ""; String sFilter = ""; bool IsFirstFilter = true;
             // create filter
@@ -40,7 +40,7 @@ namespace DBLookup
                 for (int i = 0; i < (row.Cells.Count - 1); i++)
                 {
                     sColumnName = dgrid_Search.Columns[i].Name;
-                    sValue = dgrid_Search.Rows[e.RowIndex].Cells[i].Value.ToString().Trim();
+                    sValue = dgrid_Search.Rows[iFilterRow].Cells[i].Value.ToString().Trim();
                     if (sValue != "")
                     {
                         sFilter += (IsFirstFilter ? "" : " AND ");
