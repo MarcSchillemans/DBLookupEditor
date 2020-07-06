@@ -30,7 +30,7 @@ namespace DBLookup
                 col.Width = dgrid_TableData.Columns[col.Index].Width;
         }
 
-        private void Dgrid_Search_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void ChangeFilter()
         {
             String sColumnName = ""; String sValue = ""; String sFilter = ""; bool IsFirstFilter = true;
             // create filter

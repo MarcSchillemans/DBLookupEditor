@@ -244,6 +244,10 @@ namespace DBLookup
                 SetConnectionString(cmbConnectString.Text);
         }
         #endregion
+        private void Dgrid_Search_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            ChangeFilter();
+        }
 
         #region Background Worker SQL Process
 

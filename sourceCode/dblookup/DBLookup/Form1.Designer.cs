@@ -360,6 +360,7 @@ namespace DBLookup
             this.dgrid_Search.RowHeadersWidth = 51;
             this.dgrid_Search.Size = new System.Drawing.Size(957, 83);
             this.dgrid_Search.TabIndex = 3;
+            this.dgrid_Search.CellValueChanged += Dgrid_Search_CellValueChanged;
             // 
             // statusStrip1
             // 
