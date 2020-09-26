@@ -15,7 +15,6 @@ namespace DBLookup
         private DataTable mod_dtblTable;
         private String mod_sCurrentConnection;
         private String mod_sTableInGrid;
-        private int mod_iRowIndexFromMouseRightClick;
         private Rectangle mod_rectDragBoxFromMouseDown;
         private int mod_iRowIndexFromMouseDown;
         private int mod_iRowIndexOfItemUnderMouseToDrop;
@@ -25,7 +24,6 @@ namespace DBLookup
         private bool mod_bTimedOut;
         private List<String> mod_lstLookupTables;
         private List<String> mod_lstConnectionStrings;
-
 
         public Form1()
         {
@@ -41,12 +39,13 @@ namespace DBLookup
         private void Form1Load(object sender, EventArgs e)
         {
             mod_bTimedOut = false;
+            dgrid_Search.CellValueChanged += Dgrid_Search_CellValueChanged;
             //getConnectionStringsFromFile("", "connections.txt", cmbConnectString); //keep for others to have an example 
             mod_lstLookupTables = GetLookupTables();
-
+            dgrid_TableData.MouseClick += Dgrid_TableData_MouseClick;
+            dgrid_TableData.ContextMenuStrip = cmenuDgrid_TableData_Actions;
             ComboInit();
         }
-
 
         #region Combobox
         private bool ComboInit()
@@ -86,40 +85,11 @@ namespace DBLookup
             }
         }
 
-        private void CmenuItemDgrid_Table_Actions_MouseDown(object sender, MouseEventArgs e) {
-            DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
-        }
-
         private void Dgrid_TableData_MouseDown(object sender, MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
             DataGridView.HitTestInfo ht = dgrid_TableData.HitTest(e.X, e.Y);
             mod_iRowIndexFromMouseDown = ht.RowIndex;
-
-            if (e.Button == MouseButtons.Right)
-            {
-                bool bRowsAreSelected = false;
-                if (dgrid_TableData.SelectedRows.Count > 0) bRowsAreSelected = true;
-                bool bClickedRowIsInSelection = dgrid_TableData.Rows[mod_iRowIndexFromMouseDown].Selected;
-
-                //Checks for correct column index
-                if ((ht.RowIndex != -1) || (ht.RowIndex == -1 && bRowsAreSelected))
-                {
-                    ContextMenuStrip cmenuDgrid_Table_Actions = new ContextMenuStrip();
-                    ToolStripMenuItem cmenuItemDgrid_Table_Actions = new ToolStripMenuItem("Delete Record(s)");
-                    cmenuItemDgrid_Table_Actions.MouseDown += CmenuItemDgrid_Table_Actions_MouseDown;
-                    cmenuDgrid_Table_Actions.Items.AddRange(new ToolStripItem[] { cmenuItemDgrid_Table_Actions});
-                    dgrid_TableData.ContextMenuStrip = cmenuDgrid_Table_Actions;
-                }
-                else
-                {
-                    dgrid_TableData.ContextMenuStrip = null;
-                }
-            }
-            else
-            {
-                dgrid_TableData.ContextMenuStrip = null;
-            }
 
             if (mod_iRowIndexFromMouseDown != -1)
             {
@@ -140,6 +110,48 @@ namespace DBLookup
                 mod_rectDragBoxFromMouseDown = Rectangle.Empty;
         }
 
+        private void Dgrid_TableData_MouseClick(object sender, MouseEventArgs e)
+        {
+            // Get the index of the item the mouse is below.
+            DataGridView.HitTestInfo ht = dgrid_TableData.HitTest(e.X, e.Y);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                int iIndex = ht.RowIndex;
+                //Checks for correct column index: -1 = header
+                if ((iIndex == -1 && dgrid_TableData.SelectedRows.Count > 0) || ht.RowIndex != -1)
+                {
+                    cMenuItem_DeleteSelectedRecordOnly.Visible = (!dgrid_TableData.Rows[iIndex].Selected);
+                    cmenuDgrid_TableData_Actions.Show();
+                }
+                //else
+                //{
+                //    dgrid_TableData.ContextMenuStrip = null;
+                //}
+            }
+            //else
+            //{
+            //    dgrid_TableData.ContextMenuStrip = null;
+            //}
+        }
+
+        private void CmenuItemDgrid_Table_DeleteHighlightedRecords_MouseDown(object sender, MouseEventArgs e)
+        {
+            cMenu_DBTree_TableScriptActions.Hide();
+            DialogResult dialogResult = MessageBox.Show("Ary you shure you want to delete the selected records from the grid?\nYou can reset the grid by double clicking on the tree node.",
+                    "DBLookup",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
+            }
+
+            //contextMenuStripTable.Dispose();
+            dgrid_TableData.ContextMenuStrip = null;
+        }
+
+
         private void Original_Dgrid_TableData_MouseDown(object sender, MouseEventArgs e)
         {
             // Get the index of the item the mouse is below.
@@ -153,13 +165,13 @@ namespace DBLookup
                 {
                     //Create the ContextStripMenu for Creating the PO Sub Form
                     ContextMenuStrip menu = new ContextMenuStrip();
-                    ToolStripMenuItem cmenuItemDgrid_Table_Actions = new ToolStripMenuItem("Copy to Clipboard");
+                    ToolStripMenuItem cmenuItemDgrid_Table_DeleteHighlightedRecords = new ToolStripMenuItem("Copy to Clipboard");
                     ToolStripMenuItem menuClip2 = new ToolStripMenuItem("Export to Text");
 
-                    cmenuItemDgrid_Table_Actions.MouseDown += ExportSQLTextToClipboard;
+                    cmenuItemDgrid_Table_DeleteHighlightedRecords.MouseDown += ExportSQLTextToClipboard;
                     menuClip2.MouseDown += ExportCsv;
 
-                    menu.Items.AddRange(new ToolStripItem[] { cmenuItemDgrid_Table_Actions, menuClip2 });
+                    menu.Items.AddRange(new ToolStripItem[] { cmenuItemDgrid_Table_DeleteHighlightedRecords, menuClip2 });
 
                     //Assign created context menu strip to the DataGridView
                     dgrid_TableData.ContextMenuStrip = menu;
@@ -472,7 +484,17 @@ namespace DBLookup
         #region button_clicks
         private void BtnDeleteRecordsFromTableGrild_Click(object sender, EventArgs e)
         {
-            DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
+            if (dgrid_TableData.SelectedRows.Count > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Ary you shure you want to delete the selected records from the grid?\nYou can reset the grid by double clicking on the tree node.",
+                    "DBLookup",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    DeleteSelectedRecordsFromTableGrid(dgrid_TableData);
+                }
+            }
         }
 
         private void BtnCollapseTree_Click(object sender, EventArgs e)
@@ -490,15 +512,23 @@ namespace DBLookup
 
         private void BtnApplyChangesToDB_Click(object sender, EventArgs e)
         {
-            ClearTableDataFilter();
-            switch (mod_sAdapterSource)
+            DialogResult dialogResult = MessageBox.Show("Ary you shure you want to update the database with updates, inserts and/or deletes?\nThis action cannot be undone.",
+                    "DBLookup",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
             {
-                case "SQL":
-                    UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Update");
-                    UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Delete");
-                    break;
-                case "OLE":
-                    break;
+                ClearTableDataFilter();
+
+                switch (mod_sAdapterSource)
+                {
+                    case "SQL":
+                        UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Update");
+                        UpdateGridDataToDB(mod_execParam.SqlStatement, mod_sCurrentConnection, mod_dtblTable, "Delete");
+                        break;
+                    case "OLE":
+                        break;
+                }
             }
         }
 

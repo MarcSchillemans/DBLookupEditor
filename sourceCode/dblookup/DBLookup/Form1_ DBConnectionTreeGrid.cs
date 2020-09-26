@@ -116,7 +116,7 @@ namespace DBLookup
                                     sPreviousTableName = tableName;
                                     TreeNode tableNode = new TreeNode(tableName)
                                     {
-                                        ContextMenuStrip = contextMenuStripTable
+                                        ContextMenuStrip = cMenu_DBTree_TableScriptActions
                                     };
                                     databaseNode.Nodes.Add(tableNode);
                                 }

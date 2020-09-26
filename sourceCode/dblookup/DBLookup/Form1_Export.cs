@@ -37,13 +37,14 @@ namespace DBLookup
                     {
                         case "Update":
                             res = sqlDataAdapter.Update(table);
+                            sAction = "Update/Insert";
                             break;
                         case "Delete":
                             res = sqlDataAdapter.Update(table);
                             break;
-                        case "Insert":
-                            //res = sqlDataAdapter.Insert(table);
-                            break;
+                        //case "Insert": //this action is incorporated in the Update part
+                        //    //res = sqlDataAdapter.Insert(table);
+                        //    break;
                     }
                     sqlTransaction.Commit();
                     MessageBox.Show(sAction + " was successful");
